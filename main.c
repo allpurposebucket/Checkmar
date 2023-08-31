@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
 
         activity = select(max_sd + 1, &readfds, NULL, NULL, NULL);
 
-        if ((activity > 0) && errno != EINTR) {
+        if ((activity < 0) && errno != EINTR) {
             perror("select");
         }
 
@@ -102,7 +102,6 @@ int main(int argc, char *argv[]) {
                 if (client_sockets[i] == 0) {
                     client_sockets[i] = new_socket;
                     printf("Hosts connected: %d\n", i);
-
                     break;
                 }
             }
