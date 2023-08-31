@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
         for (int i = 0; i < max_clients; i++) {
             sd = client_sockets[i];
 
-            if (FD_ISSET(sd, &readfds)) {
+            if (FD_ISSET(sd, &readfds)) { // Checks to see if client is still connected
                 if ((valread = read(sd, buffer, 1024)) == 0) {
                     getpeername(sd, (struct sockaddr *)&address, (socklen_t *)&addrlen);
                     printf("Host disconnected: %s:%d\n", inet_ntoa(address.sin_addr), ntohs(address.sin_port));
